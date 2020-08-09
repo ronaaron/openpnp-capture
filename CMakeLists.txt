@@ -15,8 +15,6 @@ project (openpnp-capture)
 
     set(ENABLE_STATIC ON)
     set(ENABLE_SHARED OFF)
-    set(CMAKE_C_COMPILER "/usr/bin/clang")
-    set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 
 # make sure the libjpegturbo is compiled with the
 # position independent flag -fPIC
