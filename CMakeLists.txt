@@ -13,6 +13,11 @@
 cmake_minimum_required(VERSION 3.1)
 project (openpnp-capture)
 
+    set(ENABLE_STATIC ON)
+    set(ENABLE_SHARED OFF)
+    set(CMAKE_C_COMPILER "/usr/bin/clang")
+    set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+
 # make sure the libjpegturbo is compiled with the
 # position independent flag -fPIC
 IF (UNIX)
@@ -77,7 +82,7 @@ IF (WIN32)
                 win/platformstream.cpp)
 
     # create the library
-    add_library(openpnp-capture SHARED ${SOURCE})
+    add_library(openpnp-capture STATIC ${SOURCE})
 
     # add windows-specific test application
     add_subdirectory(win/tests)
@@ -96,7 +101,7 @@ ELSEIF(APPLE)
 
 
     # create the library
-    add_library(openpnp-capture SHARED ${SOURCE})
+    add_library(openpnp-capture STATIC ${SOURCE})
 
     # include OS X specific frameworks
     target_link_libraries(openpnp-capture
@@ -118,7 +123,6 @@ ELSEIF(UNIX)
     # causes a compile problem.. we need to fix this
     # later...
     
-    set(ENABLE_SHARED OFF)
     set(WITH_SIMD OFF)      
     add_subdirectory(linux/contrib/libjpeg-turbo-dev)
 
@@ -138,12 +142,12 @@ ELSEIF(UNIX)
     include_directories(SYSTEM "${CMAKE_CURRENT_SOURCE_DIR}/linux/contrib/libjpeg-turbo-dev")
     
     # create our capture library
-    add_library(openpnp-capture SHARED ${SOURCE})
+    add_library(openpnp-capture STATIC ${SOURCE})
 
     # add pthreads library 
     set(THREADS_PREFER_PTHREAD_FLAG ON)
-    find_package(Threads REQUIRED)    
-    target_link_libraries(openpnp-capture Threads::Threads)
+#    find_package(Threads REQUIRED)    
+#    target_link_libraries(openpnp-capture Threads::Threads)
 
     # add turbojpeg-static library
     target_link_libraries(openpnp-capture turbojpeg-static)

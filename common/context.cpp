@@ -164,6 +164,7 @@ int32_t Context::openStream(CapDeviceID id, CapFormatID formatID)
         LOG(LOG_ERR, "Could not open stream for device %s\n", device->m_name.c_str());
         return -1;
     }
+#ifdef DEBUG
     else
     {
         printf("[DBG ] FOURCC = ");
@@ -175,6 +176,7 @@ int32_t Context::openStream(CapDeviceID id, CapFormatID formatID)
         }
         printf("\n");
     }
+#endif
 
     int32_t streamID = storeStream(s);
     return streamID;
