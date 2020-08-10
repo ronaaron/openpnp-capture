@@ -76,7 +76,7 @@ bool PlatformContext::enumerateDevices()
         platformDeviceInfo* deviceInfo = new platformDeviceInfo();
         deviceInfo->m_captureDevice = CFBridgingRetain(device);
         deviceInfo->m_name = std::string(device.localizedName.UTF8String) + " (" + std::string(device.manufacturer.UTF8String) + ")";
-        deviceInfo->m_uniqueID = deviceInfo->m_name  + " " + std::string(device.uniqueID.UTF8String);
+        deviceInfo->m_uniqueID = std::string(device.uniqueID.UTF8String);
 
         std::string model = device.modelID.UTF8String;
         LOG(LOG_DEBUG, "Name : %s\n", deviceInfo->m_name.c_str());

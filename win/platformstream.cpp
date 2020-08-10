@@ -26,6 +26,9 @@
     SOFTWARE.
 */
 
+#ifdef MINGW
+#include <math.h>
+#endif
 #include "platformdeviceinfo.h"
 #include "platformstream.h"
 #include "platformcontext.h"

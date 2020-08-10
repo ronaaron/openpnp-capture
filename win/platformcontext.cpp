@@ -94,7 +94,7 @@ bool PlatformContext::enumerateDevices()
 
     ScopedComPtr<ICreateDevEnum> devEnum(dev_enum);
 
-	hr = devEnum->CreateClassEnumerator(CLSID_VideoInputDeviceCategory,&enum_moniker,NULL);
+	hr = devEnum->CreateClassEnumerator(CLSID_VideoInputDeviceCategory,&enum_moniker,0);
 	if (hr == S_FALSE)
     {
         // no devices found!

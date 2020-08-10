@@ -28,10 +28,14 @@
 #ifndef openpnp_context_h
 #define openpnp_context_h
 
+#include <stdint.h>
+#ifdef MINGW
+extern "C" int vsnprintf(char *str, size_t size, char const *format, va_list args);
+extern "C" int snprintf(char *str, int size, char const *format, ...);
+#endif
 #include <vector>
 #include <string>
 #include <map>
-#include <stdint.h>
 
 #include "openpnp-capture.h"
 #include "deviceinfo.h"

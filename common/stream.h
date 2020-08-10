@@ -30,6 +30,10 @@
 
 #include <stdint.h>
 #include <vector>
+#ifdef MINGW
+extern "C" int vsnprintf(char *str, size_t size, char const *format, va_list args);
+extern "C" int snprintf(char *str, int size, char const *format, ...);
+#endif
 #include <mutex>
 #include "logging.h"
 

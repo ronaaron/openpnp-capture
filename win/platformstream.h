@@ -31,7 +31,12 @@
 
 #include <windows.h>
 #include <dshow.h>
+#ifdef MINGW
+extern "C" int vsnprintf(char *str, size_t size, char const *format, va_list args);
+extern "C" int snprintf(char *str, int size, char const *format, ...);
+#else
 #include <Vidcap.h>
+#endif
 #include <Ksmedia.h>
 
 #include <stdint.h>

@@ -28,6 +28,10 @@
 
 #include <windows.h>
 #include <Dshow.h>
+#ifdef MINGW
+extern "C" int vsnprintf(char *str, size_t size, char const *format, va_list args);
+extern "C" int snprintf(char *str, int size, char const *format, ...);
+#endif
 #include <string>
 
 #include "../common/deviceinfo.h"

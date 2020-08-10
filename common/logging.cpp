@@ -25,6 +25,10 @@
 
 #include <stdio.h>
 #include <stdarg.h>
+#ifdef MINGW
+extern "C" int vsnprintf(char *str, size_t size, char const *format, va_list args);
+extern "C" int snprintf(char *str, int size, char const *format, ...);
+#endif
 #include "logging.h"
 
 /* In their infinite "wisdom" Microsoft have declared snprintf is deprecated
