@@ -29,11 +29,34 @@
 
 #include "mjpeghelper.h"
 #include "../common/logging.h"
+#include <string.h>
+#include <stdio.h>
 
 bool MJPEGHelper::decompressFrame(const uint8_t *inBuffer,
     size_t inBytes, uint8_t *outBuffer,
     uint32_t outBufWidth, uint32_t outBufHeight)
 {
+#ifdef USE_STB_IMAGE
+	int width = 0;
+	int height = 0;
+	int chan = 0;
+	unsigned char *data = stbi_load_from_memory((stbi_uc const *) inBuffer, (int) inBytes, &width, &height, &chan, 0);
+	if (!data)
+	{
+		printf("Failed: %s\n", stbi_failure_reason());
+		return false;
+	}
+	if (width != outBufWidth || height != outBufHeight)
+	{
+		printf("Failed: %dx%d != %dx%d\n", width, height, outBufWidth, outBufHeight);
+		stbi_image_free(data);
+		return false;
+	}
+
+	memcpy(outBuffer, data, width * height * chan);
+	stbi_image_free(data);
+
+#else
     // note: the jpeg-turbo library apparently uses a non-const
     // buffer pointer to the incoming JPEG data.
     // Hopefully, the lib does not change the JPEG data buffer.
@@ -78,6 +101,6 @@ bool MJPEGHelper::decompressFrame(const uint8_t *inBuffer,
 
         return true;
     }
-
+#endif
     return true;
 }

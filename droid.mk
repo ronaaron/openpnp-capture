@@ -16,7 +16,7 @@ endif
 PLATFORM="Linux $(BITS) bit release"
 CFLAGS += -std=c++11 
 CFLAGS += -Os -D__BUILDTYPE__='"release"'
-CFLAGS += -pipe -U_FORTIFY_SOURCE -fPIE 
+CFLAGS += -pipe -U_FORTIFY_SOURCE -fPIC 
 CFLAGS += -Ilinux/contrib/libjpeg-turbo-dev -Iinclude -I. -D__PLATFORM__='$(PLATFORM)'
 
 SRC = 	linux/platformcontext.cpp linux/platformstream.cpp linux/mjpeghelper.cpp linux/yuvconverters.cpp \

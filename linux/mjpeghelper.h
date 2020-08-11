@@ -30,7 +30,12 @@
 #ifndef linux_mjpeghelper_h
 #define linux_mjpeghelper_h
 
+#ifdef USE_STB_IMAGE
+#include "stb_image.h"
+#else
 #include <turbojpeg.h>
+#endif
+
 #include <stdint.h>
 #include <stdlib.h> // size_t
 
@@ -39,12 +44,16 @@ class MJPEGHelper
 public:
     MJPEGHelper()
     {
-        m_decompressHandle = tjInitDecompress();
+#ifndef USE_STB_IMAGE
+       m_decompressHandle = tjInitDecompress();
+#endif
     }
 
     virtual ~MJPEGHelper()
     {
+#ifndef USE_STB_IMAGE
         tjDestroy(m_decompressHandle);
+#endif
     }
 
     /** Decompress a JPEG contained in the buffer. 
@@ -56,7 +65,9 @@ public:
         uint8_t *outBuffer, uint32_t outBufWidth, uint32_t outButHeight);
 
 protected:
+#ifndef USE_STB_IMAGE
     tjhandle m_decompressHandle;  ///< decompressor handle
+#endif
 };
 
 #endif
