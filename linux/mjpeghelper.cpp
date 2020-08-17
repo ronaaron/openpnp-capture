@@ -43,12 +43,12 @@ bool MJPEGHelper::decompressFrame(const uint8_t *inBuffer,
 	unsigned char *data = stbi_load_from_memory((stbi_uc const *) inBuffer, (int) inBytes, &width, &height, &chan, 0);
 	if (!data)
 	{
-		printf("Failed: %s\n", stbi_failure_reason());
+	//	printf("Failed: %s\n", stbi_failure_reason());
 		return false;
 	}
 	if (width != outBufWidth || height != outBufHeight)
 	{
-		printf("Failed: %dx%d != %dx%d\n", width, height, outBufWidth, outBufHeight);
+	//	printf("Failed: %dx%d != %dx%d\n", width, height, outBufWidth, outBufHeight);
 		stbi_image_free(data);
 		return false;
 	}

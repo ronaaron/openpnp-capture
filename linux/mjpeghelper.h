@@ -30,6 +30,7 @@
 #ifndef linux_mjpeghelper_h
 #define linux_mjpeghelper_h
 
+#define USE_STB_IMAGE
 #ifdef USE_STB_IMAGE
 #include "stb_image.h"
 #else
